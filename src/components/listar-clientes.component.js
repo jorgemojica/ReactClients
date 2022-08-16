@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { clienteService } from "../services/cliente.service";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 export default function ListarClientes() {
 
@@ -12,6 +13,14 @@ export default function ListarClientes() {
             setClientes(response.data);
         });
     }, []);
+
+    const eliminarCliente = (event) => {
+        const id = event.target.id;
+        clienteService.delete(id).then(response => {
+            console.log("Cliente eliminado");
+        });
+        window.location.reload();
+    }
 
     return (
         <div className="text-center">
@@ -34,11 +43,13 @@ export default function ListarClientes() {
                             <td>{cliente.telefono}</td>
                             <td>{cliente.edad}</td>
                             <td>
-                                <Button variant="warning" type="submit">
-                                    Editar
-                                </Button>
+                                <Link to={`/editarClientes/${cliente.id}`}>
+                                    <Button variant="warning">
+                                        Editar
+                                    </Button>
+                                </Link>
                                 &nbsp;&nbsp;
-                                <Button variant="danger" type="submit">
+                                <Button onClick={eliminarCliente} id={cliente.id} variant="danger" type="submit">
                                     Eliminar
                                 </Button>
                             </td>

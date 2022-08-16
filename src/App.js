@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, Link } from "react-router-dom";
 import ListarClientes from "./components/listar-clientes.component";
 import AgregarClientes from "./components/agregar-clientes.component";
+import EditarClientes from "./components/editar-clientes.component";
 
 class App extends Component {
   render() {
@@ -34,6 +35,7 @@ class App extends Component {
           <Routes>
             <Route exact path="/clientes" element={<ListarClientes />} />
             <Route exact path="/agregarCliente" element={<AgregarClientes />} />
+            <Route exact path="/editarClientes/:id" element={<EditarClientes />} />
           </Routes>
         </div>
       </div>

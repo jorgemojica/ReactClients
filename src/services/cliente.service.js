@@ -14,6 +14,15 @@ class ClienteService {
         return http.delete(`/${id}`);
     }
 
+    update(id, cliente) {
+        console.log("Service", cliente);
+        return http.put(`/${id}`, cliente);
+    }
+
+    getById(id) {
+        return http.get(`/${id}`);
+    }
+
 }
 
 export const clienteService = new ClienteService();

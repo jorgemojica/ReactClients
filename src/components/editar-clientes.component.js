@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { clienteService } from "../services/cliente.service";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import { Link } from 'react-router-dom';
+import { useParams, Link } from "react-router-dom";
 
-export default function AgregarClientes() {
+export default function EditarClientes() {
+
+    const { id } = useParams();
 
     let [cliente, setCliente] = useState({
         nombre: "",
@@ -20,18 +22,30 @@ export default function AgregarClientes() {
         { estado: true, nombre: "Activo" }
     ]
 
+    useEffect(() => {
+        clienteService.getById(id).then(response => {
+            setCliente(response.data);
+            console.log(response.data);
+        });
+    }, [id]);
+
+    console.log(cliente);
+
     const handleChange = (event) => {
         setCliente({ ...cliente, [event.target.name]: event.target.value });
     };
 
     const handleClick = () => {
-        clienteService.create(cliente).then(response => {
+        clienteService.update(id, cliente).then(response => {
             setCliente({
                 nombre: response.data.nombre,
                 telefono: response.data.telefono,
                 edad: response.data.edad,
                 estado: response.data.estado
             });
+            console.log("Cliente actualizado");
+        }).catch(err => {
+            console.log(err);
         });
     }
 
@@ -45,19 +59,19 @@ export default function AgregarClientes() {
                     <Row>
                         <Form.Group className="mb-3" controlId="nombre">
                             <Form.Label>Nombre</Form.Label>
-                            <Form.Control onChange={handleChange} name="nombre" type="text" placeholder="Nombre" />
+                            <Form.Control value={cliente.nombre} onChange={handleChange} name="nombre" type="text" placeholder="Nombre" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="telefono">
                             <Form.Label>Teléfono</Form.Label>
-                            <Form.Control onChange={handleChange} name="telefono" type="text" placeholder="Teléfono" />
+                            <Form.Control value={cliente.telefono} onChange={handleChange} name="telefono" type="text" placeholder="Teléfono" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="edad">
                             <Form.Label>Edad</Form.Label>
-                            <Form.Control onChange={handleChange} name="edad" type="text" placeholder="Edad" />
+                            <Form.Control value={cliente.edad} onChange={handleChange} name="edad" type="text" placeholder="Edad" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="estado">
                             <Form.Label>Estado</Form.Label>
-                            <Form.Select onChange={handleChange}
+                            <Form.Select value={cliente.estado} onChange={handleChange}
                                 name="estado" aria-label="Default select example">
                                 <option>Seleccione...</option>
                                 {estados.map(estado => (
