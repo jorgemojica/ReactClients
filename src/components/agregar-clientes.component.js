@@ -65,7 +65,7 @@ export default function AgregarClientes() {
                                 ))}
                             </Form.Select>
                         </Form.Group>
-                        <Link to="/clientes">
+                        <Link to="/clientes" className="text-center">
                             <Button onClick={handleClick} variant="primary" type="submit">
                                 Guardar
                             </Button>

@@ -52,7 +52,7 @@ export default function EditarClientes() {
     return (
         <Container className="mt-5">
             <div className="text-center mb-5">
-                <h1>Agregar Cliente</h1>
+                <h1>Editar Cliente</h1>
             </div>
             <Form>
                 <Container className="col-4">
@@ -79,9 +79,9 @@ export default function EditarClientes() {
                                 ))}
                             </Form.Select>
                         </Form.Group>
-                        <Link to="/clientes">
+                        <Link to="/clientes" className="text-center">
                             <Button onClick={handleClick} variant="primary" type="submit">
-                                Guardar
+                                Editar
                             </Button>
                         </Link>
                     </Row>
