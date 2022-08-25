@@ -15,7 +15,6 @@ class ClienteService {
     }
 
     update(id, cliente) {
-        console.log("Service", cliente);
         return http.put(`/${id}`, cliente);
     }
 

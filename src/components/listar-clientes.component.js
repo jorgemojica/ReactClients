@@ -32,6 +32,7 @@ export default function ListarClientes() {
                         <th>Nombre</th>
                         <th>Teléfono</th>
                         <th>Edad</th>
+                        <th>Estado</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -42,6 +43,7 @@ export default function ListarClientes() {
                             <td>{cliente.nombre}</td>
                             <td>{cliente.telefono}</td>
                             <td>{cliente.edad}</td>
+                            <td>{(cliente.estado)?("Activo"):("Inactivo")}</td>
                             <td>
                                 <Link to={`/editarClientes/${cliente.id}`}>
                                     <Button variant="warning">

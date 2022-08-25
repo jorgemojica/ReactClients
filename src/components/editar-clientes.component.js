@@ -25,11 +25,8 @@ export default function EditarClientes() {
     useEffect(() => {
         clienteService.getById(id).then(response => {
             setCliente(response.data);
-            console.log(response.data);
         });
     }, [id]);
-
-    console.log(cliente);
 
     const handleChange = (event) => {
         setCliente({ ...cliente, [event.target.name]: event.target.value });
